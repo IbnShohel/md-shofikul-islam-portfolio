@@ -770,13 +770,15 @@ button,a{-webkit-tap-highlight-color:transparent}
         const panel = document.getElementById(button.getAttribute("aria-controls"));
         const item = button.closest('.accordion-item[data-group="focus"]');
         button.setAttribute("aria-expanded", String(isOpen));
+        if (isOpen) button.removeAttribute("data-auto-closed");
         if (panel) panel.setAttribute("aria-hidden", String(!isOpen));
         if (isOpen && item && focusObserver) focusObserver.observe(item);
         if (!isOpen && item && focusObserver) focusObserver.unobserve(item);
       }
-      function closeFocus(button, shouldScroll) {
+      function closeFocus(button, shouldScroll, wasAutoClosed) {
         if (!button || button.getAttribute("aria-expanded") !== "true") return;
         setFocusState(button, false);
+        if (wasAutoClosed) button.setAttribute("data-auto-closed", "true");
         if (shouldScroll) button.scrollIntoView({ behavior: "smooth", block: "center" });
       }
       function openFocus(button) {
@@ -790,7 +792,7 @@ button,a{-webkit-tap-highlight-color:transparent}
           if (!entry.isIntersecting) {
             const button = entry.target.querySelector(".accordion-trigger");
             if (button && button.dataset.focusInteraction === "true") return;
-            closeFocus(button, false);
+            closeFocus(button, false, true);
           }
         });
       }, { threshold: 0 });
