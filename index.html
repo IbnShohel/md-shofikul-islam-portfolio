@@ -789,7 +789,7 @@ button,a{-webkit-tap-highlight-color:transparent}
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) {
             const button = entry.target.querySelector(".accordion-trigger");
-            if (button && (button.dataset.focusInteraction === "true" || entry.target.contains(document.activeElement))) return;
+            if (button && button.dataset.focusInteraction === "true") return;
             closeFocus(button, false);
           }
         });
