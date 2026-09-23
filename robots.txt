@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ibnshohel.github.io/md-shofikul-islam-portfolio/sitemap.xml
+Sitemap: https://mdshofikul-foodtech.github.io/md-shofikul-islam-portfolio/sitemap.xml
